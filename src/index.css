@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-700: #1a2240;
+  --color-navy-800: #0f1530;
+  --color-navy-850: #0b1024;
+  --color-navy-900: #080c1c;
+  --color-navy-950: #04060f;
+
+  --color-electric-200: #a5f3fc;
+  --color-electric-300: #67e8f9;
+  --color-electric-400: #22d3ee;
+  --color-electric-500: #06b6d4;
+  --color-electric-600: #0891b2;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-kenburns: kenburns 24s ease-out both;
+  --animate-ping-slow: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes kenburns {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    /* Hide the native scrollbar; the top progress bar shows position instead */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  body {
+    @apply bg-navy-950 text-slate-200 overflow-x-hidden;
+    margin: 0;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    @apply bg-electric-400/30 text-white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-electric-400);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .section {
+    @apply relative py-24 sm:py-32;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-electric-400;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-8 bg-electric-400/60;
+  }
+
+  .heading-xl {
+    @apply text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-electric-300 via-electric-400 to-sky-500 bg-clip-text text-transparent;
+  }
+
+  /* Solid surface instead of backdrop-blur: looks the same on a dark page, costs nothing to paint */
+  .card {
+    @apply rounded-2xl border border-white/[0.07] bg-navy-900/80;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-[transform,background-color,box-shadow,border-color] duration-300 ease-out active:scale-[0.97];
+  }
+  .btn-primary {
+    @apply bg-electric-400 text-navy-950 hover:bg-electric-300 hover:shadow-[0_8px_30px_-6px_rgba(34,211,238,0.55)];
+  }
+  .btn-ghost {
+    @apply border border-white/15 text-white hover:border-white/30 hover:bg-white/5;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder:text-slate-500 transition-colors duration-200 focus:border-electric-400/60 focus:bg-white/[0.05] focus:outline-none;
+  }
+
+  /* Cursor-following highlight; --x/--y are set from pointer events, so only a paint of this one layer */
+  .spotlight {
+    @apply relative isolate overflow-hidden;
+  }
+  .spotlight::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300;
+    background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(34, 211, 238, 0.12), transparent 60%);
+  }
+  .spotlight:hover::before {
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-size: 56px 56px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  }
+
+  .mask-fade-y {
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
