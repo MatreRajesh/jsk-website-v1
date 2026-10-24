@@ -1,20 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-700: #1a2240;
-  --color-navy-800: #0f1530;
-  --color-navy-850: #0b1024;
-  --color-navy-900: #080c1c;
-  --color-navy-950: #04060f;
+  /* Brand palette, taken from the JSK visiting card: deep teal ground + logo yellow */
+  --color-pine-600: #13625b;
+  --color-pine-700: #0f4f4a;
+  --color-pine-800: #0b3b38;
+  --color-pine-850: #08302d;
+  --color-pine-900: #062724;
+  --color-pine-950: #031a18;
 
-  --color-electric-200: #a5f3fc;
-  --color-electric-300: #67e8f9;
-  --color-electric-400: #22d3ee;
-  --color-electric-500: #06b6d4;
-  --color-electric-600: #0891b2;
+  --color-gold-200: #fff4a8;
+  --color-gold-300: #ffe766;
+  --color-gold-400: #ffd60a;
+  --color-gold-500: #f2be00;
+  --color-gold-600: #c99a00;
+
+  /* Neutral greys nudged toward the teal so body text sits in the same family */
+  --color-slate-200: #dde8e6;
+  --color-slate-300: #c3d5d2;
+  --color-slate-400: #94aeaa;
+  --color-slate-500: #6b8682;
+  --color-slate-600: #4c6561;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-brand: 'Anton', Impact, 'Arial Narrow Bold', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -56,8 +66,11 @@
   .lenis.lenis-stopped { overflow: hidden; }
 
   body {
-    @apply bg-navy-950 text-slate-200 overflow-x-hidden;
+    @apply bg-pine-950 text-slate-200 overflow-x-hidden;
     margin: 0;
+    /* Same soft teal glow as the visiting card, fixed so sections share one backdrop */
+    background-image: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(19, 98, 91, 0.35), transparent 70%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4 {
@@ -66,11 +79,11 @@
   }
 
   ::selection {
-    @apply bg-electric-400/30 text-white;
+    @apply bg-gold-400/30 text-white;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-electric-400);
+    outline: 2px solid var(--color-gold-400);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -95,11 +108,11 @@
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-electric-400;
+    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-gold-400;
   }
   .eyebrow::before {
     content: '';
-    @apply h-px w-8 bg-electric-400/60;
+    @apply h-px w-8 bg-gold-400/60;
   }
 
   .heading-xl {
@@ -107,26 +120,26 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-electric-300 via-electric-400 to-sky-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-gold-300 via-gold-400 to-gold-500 bg-clip-text text-transparent;
   }
 
   /* Solid surface instead of backdrop-blur: looks the same on a dark page, costs nothing to paint */
   .card {
-    @apply rounded-2xl border border-white/[0.07] bg-navy-900/80;
+    @apply rounded-2xl border border-white/[0.07] bg-pine-900/80;
   }
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-[transform,background-color,box-shadow,border-color] duration-300 ease-out active:scale-[0.97];
   }
   .btn-primary {
-    @apply bg-electric-400 text-navy-950 hover:bg-electric-300 hover:shadow-[0_8px_30px_-6px_rgba(34,211,238,0.55)];
+    @apply bg-gold-400 text-pine-950 hover:bg-gold-300 hover:shadow-[0_8px_30px_-6px_rgba(255,214,10,0.45)];
   }
   .btn-ghost {
     @apply border border-white/15 text-white hover:border-white/30 hover:bg-white/5;
   }
 
   .input {
-    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder:text-slate-500 transition-colors duration-200 focus:border-electric-400/60 focus:bg-white/[0.05] focus:outline-none;
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder:text-slate-500 transition-colors duration-200 focus:border-gold-400/60 focus:bg-white/[0.05] focus:outline-none;
   }
 
   /* Cursor-following highlight; --x/--y are set from pointer events, so only a paint of this one layer */
@@ -136,7 +149,7 @@
   .spotlight::before {
     content: '';
     @apply pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300;
-    background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(34, 211, 238, 0.12), transparent 60%);
+    background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(255, 214, 10, 0.1), transparent 60%);
   }
   .spotlight:hover::before {
     @apply opacity-100;

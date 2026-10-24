@@ -31,7 +31,7 @@ export default function Process() {
           <div className="absolute bottom-6 left-[21px] sm:left-[27px] top-6 w-px bg-white/10" />
           <motion.div
             style={{ scaleY: lineScale }}
-            className="absolute bottom-6 left-[21px] sm:left-[27px] top-6 w-px origin-top bg-gradient-to-b from-electric-300 to-electric-500"
+            className="absolute bottom-6 left-[21px] sm:left-[27px] top-6 w-px origin-top bg-gradient-to-b from-gold-300 to-gold-500"
           />
 
           {processSteps.map((step) => {
@@ -43,13 +43,13 @@ export default function Process() {
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true, margin: '0px 0px -30% 0px' }}
                   transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                  className="absolute left-0 top-0 grid h-11 w-11 place-items-center rounded-xl sm:h-14 sm:w-14 sm:rounded-2xl border border-electric-400/30 bg-navy-900 text-electric-400 shadow-[0_0_0_6px_var(--color-navy-950)]"
+                  className="absolute left-0 top-0 grid h-11 w-11 place-items-center rounded-xl sm:h-14 sm:w-14 sm:rounded-2xl border border-gold-400/30 bg-pine-900 text-gold-400 shadow-[0_0_0_6px_var(--color-pine-950)]"
                 >
                   <Icon size={20} />
                 </motion.span>
                 <Reveal y={20}>
-                  <div className="card p-5 transition-colors duration-300 hover:border-electric-400/25 sm:p-6">
-                    <span className="font-mono text-xs text-electric-400">STEP {step.step}</span>
+                  <div className="card p-5 transition-colors duration-300 hover:border-gold-400/25 sm:p-6">
+                    <span className="font-mono text-xs text-gold-400">STEP {step.step}</span>
                     <h3 className="mt-2 text-xl font-semibold text-white">{step.title}</h3>
                     <p className="mt-2 text-slate-400">{step.description}</p>
                   </div>

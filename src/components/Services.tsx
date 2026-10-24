@@ -30,7 +30,7 @@ export default function Services() {
                 key={svc.id}
                 variants={staggerItem}
                 onPointerMove={trackSpotlight}
-                className="card spotlight group flex flex-col transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-electric-400/30"
+                className="card spotlight group flex flex-col transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-gold-400/30"
               >
                 <div className="relative m-2 aspect-[16/10] overflow-hidden rounded-xl">
                   <img
@@ -40,20 +40,20 @@ export default function Services() {
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/10 to-transparent" />
-                  <span className="absolute left-3 top-3 rounded-full bg-navy-950/70 px-2.5 py-1 font-mono text-[10px] text-slate-300">
+                  <div className="absolute inset-0 bg-gradient-to-t from-pine-900 via-pine-900/10 to-transparent" />
+                  <span className="absolute left-3 top-3 rounded-full bg-pine-950/70 px-2.5 py-1 font-mono text-[10px] text-slate-300">
                     {svc.id}
                   </span>
                 </div>
 
                 <div className="flex flex-1 flex-col p-6 pt-3">
                   <div className="flex items-center justify-between">
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-electric-400/10 text-electric-400 transition-colors duration-300 group-hover:bg-electric-400 group-hover:text-navy-950">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-gold-400/10 text-gold-400 transition-colors duration-300 group-hover:bg-gold-400 group-hover:text-pine-950">
                       <Icon size={20} />
                     </span>
                     <ArrowUpRight
                       size={20}
-                      className="text-slate-600 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-electric-400"
+                      className="text-slate-600 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold-400"
                     />
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-white">{svc.title}</h3>
@@ -77,9 +77,9 @@ export default function Services() {
             return (
               <div
                 key={svc.title}
-                className="group flex items-start gap-4 bg-navy-900 p-6 transition-colors duration-300 hover:bg-navy-850"
+                className="group flex items-start gap-4 bg-pine-900 p-6 transition-colors duration-300 hover:bg-pine-850"
               >
-                <Icon size={22} className="mt-0.5 shrink-0 text-electric-400 transition-transform duration-300 group-hover:scale-110" />
+                <Icon size={22} className="mt-0.5 shrink-0 text-gold-400 transition-transform duration-300 group-hover:scale-110" />
                 <div>
                   <h3 className="font-sans text-base font-semibold text-white">{svc.title}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-slate-400">{svc.description}</p>

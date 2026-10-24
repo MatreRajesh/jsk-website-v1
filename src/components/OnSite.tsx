@@ -19,8 +19,8 @@ export default function OnSite() {
       <motion.div style={{ y }} className="absolute -inset-y-[15%] inset-x-0 will-change-transform">
         <img src="/images/onsite.webp" alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
       </motion.div>
-      <div className="absolute inset-0 bg-navy-950/80" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-transparent to-navy-950" />
+      <div className="absolute inset-0 bg-pine-950/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-pine-950 via-transparent to-pine-950" />
 
       <div className="container-x relative">
         <Reveal>
@@ -40,8 +40,8 @@ export default function OnSite() {
 
         <Reveal delay={0.2} className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-3">
           {points.map((p, i) => (
-            <div key={p.title} className="h-full bg-navy-950 p-7">
-              <span className="font-mono text-xs text-electric-400">0{i + 1}</span>
+            <div key={p.title} className="h-full bg-pine-950 p-7">
+              <span className="font-mono text-xs text-gold-400">0{i + 1}</span>
               <h3 className="mt-3 text-xl font-semibold text-white">{p.title}</h3>
               <p className="mt-2 text-slate-400">{p.text}</p>
             </div>

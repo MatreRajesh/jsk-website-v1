@@ -22,10 +22,10 @@ export default function About() {
                 className="h-full w-full object-cover"
               />
             </Parallax>
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-pine-950/60 to-transparent" />
           </div>
 
-          <div className="absolute -bottom-8 right-0 aspect-square w-[46%] overflow-hidden rounded-3xl border-[6px] border-navy-950 shadow-2xl">
+          <div className="absolute -bottom-8 right-0 aspect-square w-[46%] overflow-hidden rounded-3xl border-[6px] border-pine-950 shadow-2xl">
             <img
               src="/images/about-engineer.webp"
               alt="Engineer testing equipment in a lab"
@@ -42,7 +42,7 @@ export default function About() {
             transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="card absolute left-4 top-6 flex items-center gap-3 px-4 py-3 shadow-xl sm:left-6"
           >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-electric-400 text-navy-950">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gold-400 text-pine-950">
               <ShieldCheck size={20} />
             </span>
             <div>
@@ -76,11 +76,11 @@ export default function About() {
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500">Implementation lifecycle</p>
               {phases.map((phase, i) => (
                 <div key={phase} className="flex items-center gap-4">
-                  <span className="w-6 font-mono text-xs text-electric-400/70">0{i + 1}</span>
+                  <span className="w-6 font-mono text-xs text-gold-400/70">0{i + 1}</span>
                   <span className="w-32 text-sm font-medium text-slate-300">{phase}</span>
                   <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/5">
                     <motion.div
-                      className="h-full origin-left rounded-full bg-gradient-to-r from-electric-500 to-electric-300"
+                      className="h-full origin-left rounded-full bg-gradient-to-r from-gold-500 to-gold-300"
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 1 }}
                       viewport={{ once: true }}

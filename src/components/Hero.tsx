@@ -41,8 +41,8 @@ export default function Hero() {
           />
         </picture>
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/60" />
+      <div className="absolute inset-0 bg-gradient-to-r from-pine-950 via-pine-950/85 to-pine-950/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-pine-950 via-transparent to-pine-950/60" />
       <div className="absolute inset-0 bg-grid opacity-40 mask-fade-y" />
 
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="container-x relative z-10 pb-20 pt-32 sm:pt-36">
@@ -103,7 +103,7 @@ export default function Hero() {
             <div className="card relative p-6 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-electric-400/10 text-electric-400">
+                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-gold-400/10 text-gold-400">
                     <Activity size={18} />
                   </span>
                   <div>
@@ -123,7 +123,7 @@ export default function Hero() {
                     transition={{ delay: 1.2 + i * 0.18, duration: 0.6, ease }}
                     className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3"
                   >
-                    <CheckCircle2 size={18} className="text-electric-400" />
+                    <CheckCircle2 size={18} className="text-gold-400" />
                     <span className="text-sm text-slate-300">{c}</span>
                   </motion.li>
                 ))}
@@ -132,14 +132,14 @@ export default function Hero() {
               <div className="mt-6">
                 <div className="flex justify-between font-mono text-[11px] text-slate-500">
                   <span>Readiness</span>
-                  <span className="text-electric-400">100%</span>
+                  <span className="text-gold-400">100%</span>
                 </div>
                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/5">
                   <motion.div
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ delay: 1.3, duration: 1.6, ease }}
-                    className="h-full origin-left rounded-full bg-gradient-to-r from-electric-500 to-electric-300"
+                    className="h-full origin-left rounded-full bg-gradient-to-r from-gold-500 to-gold-300"
                   />
                 </div>
               </div>
@@ -160,7 +160,7 @@ export default function Hero() {
         <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Scroll</span>
         <span className="relative h-10 w-px overflow-hidden bg-white/10">
           <motion.span
-            className="absolute inset-x-0 top-0 h-1/2 bg-electric-400"
+            className="absolute inset-x-0 top-0 h-1/2 bg-gold-400"
             animate={{ y: ['-100%', '200%'] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           />

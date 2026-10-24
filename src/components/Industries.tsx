@@ -6,7 +6,7 @@ import SectionHeader from './ui/SectionHeader';
 
 export default function Industries() {
   return (
-    <section id="industries" className="section bg-navy-900/40">
+    <section id="industries" className="section bg-pine-900/40">
       <div className="container-x">
         <SectionHeader
           align="center"
@@ -29,7 +29,7 @@ export default function Industries() {
                 decoding="async"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/50 to-navy-950/10 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-pine-950 via-pine-950/50 to-pine-950/10 transition-opacity duration-500" />
 
               <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                 <h3 className="text-base font-semibold text-white sm:text-lg">{ind.name}</h3>

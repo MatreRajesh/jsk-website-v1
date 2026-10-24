@@ -4,6 +4,7 @@ import { useLenis } from 'lenis/react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { navLinks, site } from '../data/site';
 import { cn } from '../lib/utils';
+import Logo from './ui/Logo';
 
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState('');
@@ -58,16 +59,15 @@ export default function Navbar() {
           className={cn(
             'mx-auto flex max-w-7xl items-center justify-between rounded-full border px-4 py-2.5 transition-[background-color,border-color,box-shadow] duration-500 sm:px-6',
             scrolled
-              ? 'border-white/10 bg-navy-950/80 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md'
+              ? 'border-white/10 bg-pine-950/80 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md'
               : 'border-transparent bg-transparent',
           )}
         >
-          <a href="#home" className="group flex items-center gap-2" aria-label="JSK home">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-electric-400 font-display text-sm font-bold text-navy-950 transition-transform duration-300 group-hover:rotate-[-6deg]">
-              JSK
-            </span>
-            <span className="hidden font-display text-sm font-semibold leading-tight text-white sm:block">
-              JSK <span className="block text-[11px] font-normal text-slate-400">Field Technical Solutions</span>
+          <a href="#home" className="group flex items-center gap-3" aria-label="JSK home">
+            <Logo className="w-[84px] transition-transform duration-300 group-hover:-translate-y-0.5" />
+            <span className="hidden border-l border-white/15 pl-3 text-[11px] font-medium uppercase leading-tight tracking-[0.14em] text-slate-300 sm:block">
+              IT Network
+              <span className="block text-gold-400">&amp; ELV Services</span>
             </span>
           </a>
 
@@ -119,7 +119,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.25 } }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[70] flex flex-col bg-navy-950 px-6 pb-10 pt-6"
+            className="fixed inset-0 z-[70] flex flex-col bg-pine-950 px-6 pb-10 pt-6"
           >
             <div className="flex items-center justify-between">
               <span className="font-display text-lg font-semibold text-white">Menu</span>
@@ -145,7 +145,7 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                     className="flex items-baseline gap-4 border-b border-white/5 py-4 font-display text-4xl font-semibold text-white"
                   >
-                    <span className="font-mono text-xs text-electric-400">0{i + 1}</span>
+                    <span className="font-mono text-xs text-gold-400">0{i + 1}</span>
                     {link.label}
                   </a>
                 </motion.li>

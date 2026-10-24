@@ -1,7 +1,8 @@
 import { ArrowUp } from 'lucide-react';
 import { useLenis } from 'lenis/react';
-import { navLinks, site } from '../data/site';
+import { navLinks, site, team } from '../data/site';
 import { featuredServices } from '../data/services';
+import Logo from './ui/Logo';
 
 const year = new Date().getFullYear();
 
@@ -10,17 +11,14 @@ export default function Footer() {
   const toTop = () => (lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   return (
-    <footer className="relative mt-12 border-t border-white/[0.06] bg-navy-900/50">
+    <footer className="relative mt-12 border-t border-white/[0.06] bg-pine-900/50">
       <div className="container-x pb-10 pt-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
-            <a href="#home" className="flex items-center gap-2.5">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-electric-400 font-display text-sm font-bold text-navy-950">
-                JSK
-              </span>
-              <span className="font-display text-lg font-semibold text-white">JSK</span>
+            <a href="#home" className="inline-block" aria-label="JSK home">
+              <Logo withTagline className="w-44" />
             </a>
-            <p className="mt-5 text-sm font-medium text-electric-400">{site.tagline}</p>
+            <p className="mt-5 text-sm font-medium text-gold-400">{site.tagline}</p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
               Reliable on-site installation, configuration, testing and commissioning for modern business environments.
             </p>
@@ -31,7 +29,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="text-sm text-slate-400 transition-colors hover:text-electric-400">
+                  <a href={l.href} className="text-sm text-slate-400 transition-colors hover:text-gold-400">
                     {l.label}
                   </a>
                 </li>
@@ -44,7 +42,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3">
               {featuredServices.map((s) => (
                 <li key={s.id}>
-                  <a href="#services" className="text-sm text-slate-400 transition-colors hover:text-electric-400">
+                  <a href="#services" className="text-sm text-slate-400 transition-colors hover:text-gold-400">
                     {s.title}
                   </a>
                 </li>
@@ -55,13 +53,16 @@ export default function Footer() {
           <div>
             <h3 className="font-sans text-sm font-semibold text-white">Contact</h3>
             <ul className="mt-5 space-y-3 text-sm text-slate-400">
+              {team.map((m) => (
+                <li key={m.phone}>
+                  <a href={`tel:${m.phone.replace(/[^\d+]/g, '')}`} className="group transition-colors hover:text-gold-400">
+                    <span className="block text-xs text-slate-500 group-hover:text-gold-400/70">{m.name}</span>
+                    {m.phone}
+                  </a>
+                </li>
+              ))}
               <li>
-                <a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`} className="transition-colors hover:text-electric-400">
-                  {site.phone}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${site.email}`} className="transition-colors hover:text-electric-400">
+                <a href={`mailto:${site.email}`} className="transition-colors hover:text-gold-400">
                   {site.email}
                 </a>
               </li>

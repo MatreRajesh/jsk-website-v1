@@ -6,7 +6,7 @@ const items = [
 /** Infinite ticker driven by a CSS keyframe (compositor-only, no JS per frame). */
 export default function Marquee() {
   return (
-    <div className="relative border-y border-white/[0.06] bg-navy-900/60 py-5" aria-label="Technical areas">
+    <div className="relative border-y border-white/[0.06] bg-pine-900/60 py-5" aria-label="Technical areas">
       <div className="group flex overflow-hidden mask-fade-x">
         {[0, 1].map((copy) => (
           <ul
@@ -17,7 +17,7 @@ export default function Marquee() {
             {items.map((item) => (
               <li key={item} className="flex items-center gap-10 whitespace-nowrap font-display text-lg font-medium text-slate-400">
                 {item}
-                <span className="h-1.5 w-1.5 rotate-45 bg-electric-400/70" />
+                <span className="h-1.5 w-1.5 rotate-45 bg-gold-400/70" />
               </li>
             ))}
           </ul>

@@ -18,7 +18,7 @@ export default function Projects() {
             <article
               key={p.title}
               style={{ top: `${96 + i * 24}px` }}
-              className="card grid bg-navy-900 lg:sticky overflow-hidden shadow-[0_-20px_60px_-20px_rgba(0,0,0,0.8)] lg:grid-cols-2"
+              className="card grid bg-pine-900 lg:sticky overflow-hidden shadow-[0_-20px_60px_-20px_rgba(0,0,0,0.8)] lg:grid-cols-2"
             >
               <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[440px]">
                 <img
@@ -28,12 +28,12 @@ export default function Projects() {
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-navy-900/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-pine-900/80 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-pine-900/30" />
               </div>
 
               <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
                 <div className="flex items-center gap-3">
-                  <span className="rounded-full border border-electric-400/30 bg-electric-400/10 px-3 py-1 font-mono text-[11px] text-electric-300">
+                  <span className="rounded-full border border-gold-400/30 bg-gold-400/10 px-3 py-1 font-mono text-[11px] text-gold-300">
                     PRJ / 0{i + 1}
                   </span>
                   <span className="text-sm text-slate-400">{p.category}</span>
@@ -43,7 +43,7 @@ export default function Projects() {
                 <ul className="mt-8 grid grid-cols-2 gap-3">
                   {p.scope.map((s) => (
                     <li key={s} className="flex items-center gap-2 text-sm text-slate-300">
-                      <CheckCircle2 size={16} className="shrink-0 text-electric-400" />
+                      <CheckCircle2 size={16} className="shrink-0 text-gold-400" />
                       {s}
                     </li>
                   ))}

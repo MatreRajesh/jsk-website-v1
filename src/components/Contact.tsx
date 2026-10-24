@@ -84,7 +84,7 @@ export default function Contact() {
             {contactItems.map(({ icon: Icon, label, value, href }, i) => {
               const content = (
                 <>
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric-400/10 text-electric-400 transition-colors duration-300 group-hover:bg-electric-400 group-hover:text-navy-950">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gold-400/10 text-gold-400 transition-colors duration-300 group-hover:bg-gold-400 group-hover:text-pine-950">
                     <Icon size={20} />
                   </span>
                   <span>
@@ -96,7 +96,7 @@ export default function Contact() {
               return (
                 <Reveal key={label} delay={0.05 * i}>
                   {href ? (
-                    <a href={href} className="card group flex items-center gap-4 p-4 transition-colors duration-300 hover:border-electric-400/30">
+                    <a href={href} className="card group flex items-center gap-4 p-4 transition-colors duration-300 hover:border-gold-400/30">
                       {content}
                     </a>
                   ) : (
@@ -110,7 +110,7 @@ export default function Contact() {
 
         <Reveal delay={0.1}>
           <div className="card relative overflow-hidden p-6 sm:p-10">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-electric-500/15 blur-3xl" />
+            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-gold-500/15 blur-3xl" />
 
             <AnimatePresence mode="wait">
               {sent ? (
@@ -131,7 +131,7 @@ export default function Contact() {
                   <h3 className="mt-6 text-2xl font-semibold text-white">Your enquiry is ready to send</h3>
                   <p className="mt-3 max-w-sm text-slate-400">
                     We opened your email app with the details filled in. If it didn't open, email us at{' '}
-                    <a href={`mailto:${site.email}`} className="text-electric-400 underline-offset-4 hover:underline">
+                    <a href={`mailto:${site.email}`} className="text-gold-400 underline-offset-4 hover:underline">
                       {site.email}
                     </a>
                     .
@@ -156,7 +156,7 @@ export default function Contact() {
                       <input name="company" autoComplete="organization" placeholder="Company name" className={inputCls()} />
                     </Field>
                     <Field label="Phone">
-                      <input name="phone" type="tel" autoComplete="tel" placeholder="+1 555 000 0000" className={inputCls('phone')} />
+                      <input name="phone" type="tel" autoComplete="tel" placeholder="+91 98765 43210" className={inputCls('phone')} />
                     </Field>
                     <Field label="Email" error={errors.email}>
                       <input name="email" type="email" autoComplete="email" placeholder="you@company.com" className={inputCls('email')} />
@@ -169,7 +169,7 @@ export default function Contact() {
                     </Field>
                     <Field label="Service required">
                       <span className="relative block">
-                        <select name="service" defaultValue="" className={cn(inputCls(), 'cursor-pointer appearance-none pr-10 [&>option]:bg-navy-900')}>
+                        <select name="service" defaultValue="" className={cn(inputCls(), 'cursor-pointer appearance-none pr-10 [&>option]:bg-pine-900')}>
                           <option value="">Select a service…</option>
                           {serviceOptions.map((s) => (
                             <option key={s} value={s}>
