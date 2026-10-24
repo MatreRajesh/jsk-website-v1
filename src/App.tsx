@@ -2,6 +2,7 @@ import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Marquee from './components/Marquee';
+import IntroVideo from './components/IntroVideo';
 import About from './components/About';
 import Services from './components/Services';
 import Capabilities from './components/Capabilities';
@@ -26,6 +27,7 @@ function App() {
         <main>
           <Hero />
           <Marquee />
+          <IntroVideo />
           <About />
           <Services />
           <Capabilities />

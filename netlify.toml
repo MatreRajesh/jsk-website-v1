@@ -9,3 +9,10 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Serve the intro video inline only (never as an attachment) and cache it at the edge
+[[headers]]
+  for = "/video/*"
+  [headers.values]
+    Content-Disposition = "inline"
+    Cache-Control = "public, max-age=604800"
