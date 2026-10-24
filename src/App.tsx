@@ -14,6 +14,7 @@ import WhyJSK from './components/WhyJSK';
 import CTA from './components/CTA';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 import { SmoothScroll } from './components/motion/SmoothScroll';
 import ScrollProgress from './components/ui/ScrollProgress';
 
@@ -40,6 +41,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <WhatsAppButton />
       </SmoothScroll>
     </MotionConfig>
   );

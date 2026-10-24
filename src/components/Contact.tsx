@@ -1,10 +1,12 @@
 import { useState, type FormEvent, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ChevronDown, Loader2, AlertCircle } from 'lucide-react';
 import { Reveal } from './motion/Reveal';
 import SectionHeader from './ui/SectionHeader';
+import Honeypot from './ui/Honeypot';
 import { serviceOptions } from '../data/services';
 import { site } from '../data/site';
+import { normalizePhone, sendEnquiry } from '../lib/enquiry';
 import { cn } from '../lib/utils';
 
 const contactItems = [
@@ -14,16 +16,19 @@ const contactItems = [
   { icon: Clock, label: 'Hours', value: site.hours },
 ];
 
-type Errors = Partial<Record<'name' | 'email' | 'phone' | 'message', string>>;
+type Errors = Partial<Record<'name' | 'email' | 'phone' | 'service', string>>;
+
+const FIELDS = ['name', 'company', 'phone', 'email', 'location', 'service', 'message', 'website'] as const;
 
 function validate(data: FormData): Errors {
   const errors: Errors = {};
   if (!String(data.get('name') ?? '').trim()) errors.name = 'Please enter your name';
-  const email = String(data.get('email') ?? '').trim();
   const phone = String(data.get('phone') ?? '').trim();
-  if (!email && !phone) errors.email = 'Add an email or phone so we can reply';
-  else if (email && !/^\S+@\S+\.\S+$/.test(email)) errors.email = 'Enter a valid email';
-  if (String(data.get('message') ?? '').trim().length < 10) errors.message = 'Tell us a little more (10+ characters)';
+  if (!phone) errors.phone = 'Please enter your phone number';
+  else if (!normalizePhone(phone)) errors.phone = 'Enter a valid 10-digit mobile number';
+  const email = String(data.get('email') ?? '').trim();
+  if (email && !/^\S+@\S+\.\S+$/.test(email)) errors.email = 'Enter a valid email';
+  if (!String(data.get('service') ?? '')) errors.service = 'Please select a service';
   return errors;
 }
 
@@ -51,21 +56,34 @@ function Field({ label, error, children }: { label: string; error?: string; chil
 export default function Contact() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    if (sending) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const found = validate(data);
     setErrors(found);
+    setSubmitError('');
     if (Object.keys(found).length) return;
 
-    // No backend required: opens the visitor's mail app with the enquiry pre-filled.
-    const body = ['name', 'company', 'phone', 'email', 'location', 'service', 'message']
-      .map((k) => `${k[0].toUpperCase() + k.slice(1)}: ${data.get(k) || '-'}`)
-      .join('\n');
-    const subject = `Project enquiry – ${data.get('service') || 'General'}`;
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    const fields = Object.fromEntries(FIELDS.map((k) => [k, String(data.get(k) ?? '')]));
+    setSending(true);
+    try {
+      await sendEnquiry({ ...fields, phone: normalizePhone(fields.phone) ?? fields.phone, source: 'Contact Form' });
+      form.reset();
+      setSent(true);
+    } catch (err) {
+      setSubmitError(
+        err instanceof TypeError
+          ? `Network error: your enquiry could not be sent. Please check your connection and try again, or call us on ${site.phone}.`
+          : err instanceof Error ? err.message : 'Something went wrong. Please try again.',
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputCls = (key?: keyof Errors) => cn('input', key && errors[key] && 'border-rose-400/60');
@@ -128,14 +146,8 @@ export default function Contact() {
                   >
                     <CheckCircle2 size={32} />
                   </motion.span>
-                  <h3 className="mt-6 text-2xl font-semibold text-white">Your enquiry is ready to send</h3>
-                  <p className="mt-3 max-w-sm text-slate-400">
-                    We opened your email app with the details filled in. If it didn't open, email us at{' '}
-                    <a href={`mailto:${site.email}`} className="text-gold-400 underline-offset-4 hover:underline">
-                      {site.email}
-                    </a>
-                    .
-                  </p>
+                  <h3 className="mt-6 text-2xl font-semibold text-white">Thank you! We will contact you soon.</h3>
+                  <p className="mt-3 max-w-sm text-slate-400">Your enquiry has been received by our team.</p>
                   <button onClick={() => setSent(false)} className="btn btn-ghost mt-8">
                     Send another enquiry
                   </button>
@@ -148,6 +160,8 @@ export default function Contact() {
                   onSubmit={onSubmit}
                   className="relative space-y-5"
                 >
+                  <Honeypot />
+
                   <div className="grid gap-5 sm:grid-cols-2">
                     <Field label="Name *" error={errors.name}>
                       <input name="name" autoComplete="name" placeholder="Your name" className={inputCls('name')} />
@@ -155,8 +169,8 @@ export default function Contact() {
                     <Field label="Company">
                       <input name="company" autoComplete="organization" placeholder="Company name" className={inputCls()} />
                     </Field>
-                    <Field label="Phone">
-                      <input name="phone" type="tel" autoComplete="tel" placeholder="+91 98765 43210" className={inputCls('phone')} />
+                    <Field label="Phone *" error={errors.phone}>
+                      <input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="98765 43210" className={inputCls('phone')} />
                     </Field>
                     <Field label="Email" error={errors.email}>
                       <input name="email" type="email" autoComplete="email" placeholder="you@company.com" className={inputCls('email')} />
@@ -167,9 +181,9 @@ export default function Contact() {
                     <Field label="Site location">
                       <input name="location" placeholder="City / site address" className={inputCls()} />
                     </Field>
-                    <Field label="Service required">
+                    <Field label="Service required *" error={errors.service}>
                       <span className="relative block">
-                        <select name="service" defaultValue="" className={cn(inputCls(), 'cursor-pointer appearance-none pr-10 [&>option]:bg-pine-900')}>
+                        <select name="service" defaultValue="" className={cn(inputCls('service'), 'cursor-pointer appearance-none pr-10 [&>option]:bg-pine-900')}>
                           <option value="">Select a service…</option>
                           {serviceOptions.map((s) => (
                             <option key={s} value={s}>
@@ -182,19 +196,40 @@ export default function Contact() {
                     </Field>
                   </div>
 
-                  <Field label="Message *" error={errors.message}>
+                  <Field label="Message">
                     <textarea
                       name="message"
                       rows={5}
                       placeholder="Tell us about the site and what needs to be installed or tested…"
-                      className={cn(inputCls('message'), 'resize-none')}
+                      className={cn(inputCls(), 'resize-none')}
                       data-lenis-prevent
                     />
                   </Field>
 
-                  <button type="submit" className="btn btn-primary group w-full py-4 text-base">
-                    Submit Enquiry
-                    <Send size={17} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  {submitError && (
+                    <p role="alert" className="flex items-start gap-2 rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-300">
+                      <AlertCircle size={18} className="mt-0.5 shrink-0" />
+                      {submitError}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    aria-busy={sending}
+                    className="btn btn-primary group w-full py-4 text-base disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {sending ? (
+                      <>
+                        Sending...
+                        <Loader2 size={17} className="animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Submit Enquiry
+                        <Send size={17} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      </>
+                    )}
                   </button>
                   <p className="text-center text-xs text-slate-500">We usually reply within one business day.</p>
                 </motion.form>

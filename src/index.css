@@ -142,6 +142,11 @@
     @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder:text-slate-500 transition-colors duration-200 focus:border-gold-400/60 focus:bg-white/[0.05] focus:outline-none;
   }
 
+  /* Honeypot spam field: off-screen rather than display:none, which some bots skip */
+  .hp-field {
+    @apply pointer-events-none absolute -left-[9999px] top-auto h-px w-px overflow-hidden opacity-0;
+  }
+
   /* Cursor-following highlight; --x/--y are set from pointer events, so only a paint of this one layer */
   .spotlight {
     @apply relative isolate overflow-hidden;
